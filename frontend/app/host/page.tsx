@@ -21,11 +21,11 @@ export default function HostDashboard() {
     if (!ok) return;
 
     await fetch(
-      `http://localhost:8000/api/v1/listings/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+  `https://stayfinder-backend-lfj6.onrender.com/api/v1/listings/${id}`,
+  {
+    method: "DELETE",
+  }
+);
 
     setListings((prev) =>
       prev.filter((listing) => listing.id !== id)

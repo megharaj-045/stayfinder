@@ -1,6 +1,7 @@
 import type { HealthResponse, Listing } from "@/types/api";
 
-const DEFAULT_API_BASE = "http://localhost:8000";
+const DEFAULT_API_BASE =
+  "https://stayfinder-backend-lfj6.onrender.com";
 
 function resolveApiBaseUrl(): string {
   return process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_BASE;
