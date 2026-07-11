@@ -9,7 +9,7 @@ An original full-stack marketplace for browsing and booking stays — built as a
 | Frontend | Next.js (App Router), TypeScript, Tailwind CSS |
 | Backend | Python, FastAPI, Pydantic |
 | Database | SQLite (via SQLAlchemy async + aiosqlite) |
-| Deployment | Vercel (frontend) + Railway/Render (backend) — planned for Milestone 10 |
+| Deployment | Vercel (Frontend) + Render (Backend)|
 
 ## Prerequisites
 
@@ -125,33 +125,63 @@ flowchart LR
 - **Maps** may use a static image or lightweight library.
 - **Prices** are stored in cents (integer) to avoid floating-point rounding errors.
 
-## Database Schema
+ ## Database Schema
 
-> To be documented in Milestone 2 after tables and seed data are implemented.
+The application currently includes the following tables:
 
-Planned entities: `users`, `listings`, `listing_photos`, `amenities`, `listing_amenities`, `bookings`, `reviews`, `wishlists`.
+- Users
+- Listings
+- Bookings
+- Wishlist
+
+Each listing contains:
+
+- Title
+- Description
+- Location
+- Property Type
+- Price per Night
+- Rating
+- Bedrooms
+- Bathrooms
+- Beds
+- Maximum Guests
+- Amenities (WiFi, Kitchen, Parking, Pool, Air Conditioning)
+- Host ID
 
 ## API Overview
 
-> To be documented in Milestone 3 as endpoints are built.
+| Method | Endpoint                  | Description          |
+| ------ | ------------------------- | -------------------- |
+| GET    | `/api/v1/health`          | Health check         |
+| GET    | `/api/v1/listings`        | Get all listings     |
+| GET    | `/api/v1/listings/{id}`   | Get listing details  |
+| GET    | `/api/v1/listings/search` | Search listings      |
+| POST   | `/api/v1/listings`        | Create listing       |
+| PUT    | `/api/v1/listings/{id}`   | Update listing       |
+| DELETE | `/api/v1/listings/{id}`   | Delete listing       |
+| GET    | `/api/v1/bookings`        | Get bookings         |
+| POST   | `/api/v1/bookings`        | Create booking       |
+| GET    | `/api/v1/wishlist`        | Get wishlist         |
+| POST   | `/api/v1/wishlist`        | Add to wishlist      |
+| DELETE | `/api/v1/wishlist/{id}`   | Remove from wishlist |
 
-| Method | Endpoint | Description | Status |
-| --- | --- | --- | --- |
-| GET | `/api/v1/health` | Service health check | Implemented |
+## Features Implemented
 
-## Milestone Progress
+- ✅ Property search by location
+- ✅ Guest-based search
+- ✅ Property type filters
+- ✅ Listing detail page
+- ✅ Booking system
+- ✅ Trips page
+- ✅ Wishlist
+- ✅ Host dashboard
+- ✅ Create Listing
+- ✅ Edit Listing
+- ✅ Delete Listing
+- ✅ Responsive UI
+- ✅ SQLite database
+- ✅ FastAPI REST API
+- ✅ Next.js App Router
 
-- [x] **M1** — Project setup (monorepo, FastAPI skeleton, Next.js shell, health check)
-- [ ] **M2** — Database design and seed data
-- [ ] **M3** — Backend listing/search APIs
-- [ ] **M4** — Frontend layout and listing cards
-- [ ] **M5** — Search and filters
-- [ ] **M6** — Listing detail page
-- [ ] **M7** — Booking flow
-- [ ] **M8** — Host CRUD
-- [ ] **M9** — Wishlist
-- [ ] **M10** — Polish and deployment
 
-## License
-
-Assignment project — for evaluation purposes.
