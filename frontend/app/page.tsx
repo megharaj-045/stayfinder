@@ -14,6 +14,22 @@ const categoryChips = [
   "Villa",
   "Cabin",
   "House",
+  "Cottage",
+  "Bungalow",
+  "Treehouse",
+  "Resort",
+];
+
+const moreCategories = [
+  "Farm Stay",
+  "Loft",
+  "Boat",
+  "Tent",
+  "Lodge",
+  "Castle",
+  "Palace",
+  "Camp",
+  "Dome",
 ];
 
 export default function Home() {
@@ -35,19 +51,20 @@ export default function Home() {
   }
 
   async function search() {
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const data = await searchListings(
-        location,
-        selectedType,guests,
-      );
+  try {
+    const data = await searchListings(
+      location,
+      selectedType,
+      guests
+    );
 
-      setListings(data);
-    } finally {
-      setLoading(false);
-    }
+    setListings(data);
+  } finally {
+    setLoading(false);
   }
+}
 
   useEffect(() => {
     loadAll();
@@ -98,51 +115,80 @@ export default function Home() {
 />
 
             <button
-              onClick={search}
-              className="rounded-xl bg-black px-8 text-white"
-            >
-              Search
-            </button>
+  onClick={search}
+  className="rounded-xl bg-rose-500 px-8 py-3 text-white font-semibold hover:bg-rose-600 transition"
+>
+  Search
+</button>
 
             <button
-              onClick={()=>{
-               setLocation("");
-               setGuests(1);
-                setSelectedType("");
-                loadAll();
-              }}
-              className="rounded-xl border px-8"
-            >
-              Clear
-            </button>
+  onClick={() => {
+    setLocation("");
+    setGuests(1);
+    setSelectedType("");
+    loadAll();
+  }}
+  className="rounded-xl border border-gray-300 px-8 hover:bg-gray-100 transition"
+>
+  Clear
+</button>
 
           </div>
 
-          <div className="mt-8 flex gap-3 overflow-x-auto">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
 
-            {categoryChips.map((chip)=>(
+  {categoryChips.map((chip) => (
 
-              <button
-                key={chip}
-                onClick={()=>{
-                  setSelectedType(chip);
-                  searchListings(
-                    location,
-                    chip
-                  ).then(setListings);
-                }}
-                className={`rounded-full border px-5 py-2 ${
-                  selectedType===chip
-                    ? "bg-black text-white"
-                    : ""
-                }`}
-              >
-                {chip}
-              </button>
+    <button
+      key={chip}
+      onClick={() => {
+        setSelectedType(chip);
 
-            ))}
+        searchListings(
+          location,
+          chip,
+          guests
+        ).then(setListings);
+      }}
+      className={`rounded-full border px-5 py-2 transition-all ${
+        selectedType === chip
+          ? "bg-black text-white"
+          : "bg-white hover:bg-gray-100"
+      }`}
+    >
+      {chip}
+    </button>
 
-          </div>
+  ))}
+
+  <select
+    value=""
+    onChange={(e) => {
+      const value = e.target.value;
+
+      if (!value) return;
+
+      setSelectedType(value);
+
+      searchListings(
+        location,
+        value,
+        guests
+      ).then(setListings);
+    }}
+    className="rounded-full border px-4 py-2"
+  >
+    <option value="">More ▼</option>
+
+    {moreCategories.map((type) => (
+      <option key={type} value={type}>
+        {type}
+      </option>
+    ))}
+
+  </select>
+
+</div>
 
         </div>
 
