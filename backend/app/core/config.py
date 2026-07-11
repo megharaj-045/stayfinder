@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     )
 
     database_url: str = "sqlite+aiosqlite:///./stayfinder.db"
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "http://localhost:3000,https://stayfinder-orcin.vercel.app"
     api_prefix: str = "/api/v1"
     app_name: str = "StayFinder API"
 
